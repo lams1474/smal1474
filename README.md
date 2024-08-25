@@ -3,8 +3,8 @@
 
 Soy estudiante de la UEA, 
 
-TECNOLOGÍAS DE LA INFORMACIÓN.
+TECNOLOGIAS DE LA INFORMACION.
 
-Soy de Pujilí.
+Soy de Pujili.
 
 # estoy aprendiendo
