@@ -113,8 +113,4 @@ campeonato.registrar_planilla_jugadores("Club B", ["Jugador 4", "Jugador 5", "Ju
 # Mostrar tabla de posiciones
 campeonato.mostrar_tabla_posiciones()
 
-# Mostrar tarjetas acumuladas
-campeonato.mostrar_tarjetas()
-
-# Mostrar planillas de jugadores
-campeonato.mostrar_planillas()
+# Mostrar tarj
