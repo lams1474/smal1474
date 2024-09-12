@@ -10,5 +10,3 @@ division = a / b / c
 
 print(f'El valor de la suma es {suma}')
 print(f'El valor de la resta es: {resta}')
-print(f'El valor de la multiplicación es: {multiplicacion}')
-print(f'El valor de la división es: {division}')
