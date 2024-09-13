@@ -1,9 +1,9 @@
-# Crear una matriz 3D para almacenar datos de temperaturas
+# Crear una matriz 3D que represente los datos de temperaturas
 # Primera dimensión: Ciudades (3 ciudades)
 # Segunda dimensión: Días de la semana (7 días)
 # Tercera dimensión: Semanas (4 semanas)
 temperaturas = [
-    [   # Ciudad 1
+    [   # Pujili 1
         [   # Semana 1
             {"day": "Lunes", "temp": 78},
             {"day": "Martes", "temp": 80},
@@ -41,7 +41,7 @@ temperaturas = [
             {"day": "Domingo", "temp": 91}
         ]
     ],
-    [   # Ciudad 2
+    [   # Latacunga 2
         [   # Semana 1
             {"day": "Lunes", "temp": 62},
             {"day": "Martes", "temp": 64},
@@ -79,7 +79,7 @@ temperaturas = [
             {"day": "Domingo", "temp": 80}
         ]
     ],
-    [   # Ciudad 3
+    [   # Quito 3
         [   # Semana 1
             {"day": "Lunes", "temp": 90},
             {"day": "Martes", "temp": 92},
