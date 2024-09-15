@@ -1,33 +1,33 @@
-def calcular_promedio_temperaturas(temperaturas, ciudades):
+def calcular_promedio_temperaturas(datos_ciudades, nombres_ciudades):
     """
     Calcula y retorna el promedio de las temperaturas para cada ciudad y semana.
 
-    :param temperaturas: Lista 3D con los datos de las temperaturas (Ciudades -> Semanas -> Días)
-    :param ciudades: Lista con los nombres de las ciudades
+    :param datos_ciudades: Lista 3D con los datos de las temperaturas (Ciudades -> Semanas -> Días)
+    :param nombres_ciudades: Lista con los nombres de las ciudades
     :return: Diccionario con los promedios de temperatura por ciudad y semana
     """
-    promedios = {}
+    promedios_ciudades = {}  # Almacenar los resultados de promedios por ciudad
 
     # Iterar sobre cada ciudad
-    for ciudad_idx, ciudad in enumerate(temperaturas):
-        promedios[ciudades[ciudad_idx]] = []
+    for indice_ciudad, ciudad_datos in enumerate(datos_ciudades):
+        promedios_ciudades[nombres_ciudades[indice_ciudad]] = []
 
         # Iterar sobre cada semana de esa ciudad
-        for semana_idx, semana in enumerate(ciudad):
+        for indice_semana, semana_datos in enumerate(ciudad_datos):
             # Sumar las temperaturas de todos los días de la semana
-            suma_temperaturas = sum([dia["temp"] for dia in semana])
+            suma_temperaturas_semana = sum([dia["temp"] for dia in semana_datos])
 
             # Calcular el promedio dividiendo entre el número de días de la semana
-            promedio = suma_temperaturas / len(semana)
+            promedio_temperatura = suma_temperaturas_semana / len(semana_datos)
 
             # Guardar el promedio en el diccionario
-            promedios[ciudades[ciudad_idx]].append(promedio)
+            promedios_ciudades[nombres_ciudades[indice_ciudad]].append(promedio_temperatura)
 
-    return promedios
+    return promedios_ciudades
 
 
 # Datos de ejemplo
-temperaturas = [
+datos_temperaturas = [
     [
         # Pujili
         [{"day": "Lunes", "temp": 16}, {"day": "Martes", "temp": 15}, {"day": "Miércoles", "temp": 10},
@@ -75,10 +75,10 @@ temperaturas = [
     ]
 ]
 
-ciudades = ["Pujili", "Latacunga", "La Mana"]
+nombres_ciudades = ["Pujili", "Latacunga", "La Mana"]
 
 # Llamar a la función y mostrar los resultados
-promedios = calcular_promedio_temperaturas(temperaturas, ciudades)
-for ciudad, promedios_semanas in promedios.items():
-    for semana, promedio in enumerate(promedios_semanas):
-        print(f"Promedio de temperaturas en {ciudad}, Semana {semana + 1}: {promedio:.2f} grados")
+resultados_promedios = calcular_promedio_temperaturas(datos_temperaturas, nombres_ciudades)
+for ciudad, promedios in resultados_promedios.items():
+    for semana, promedio_semana in enumerate(promedios):
+        print(f"Promedio de temperaturas en {ciudad}, Semana {semana + 1}: {promedio_semana:.2f} grados")
