@@ -1,84 +1,95 @@
-def calcular_promedio_temperaturas(datos_ciudades, nombres_ciudades):
+def promedio_temperaturas(temperaturas, ciudades, ciudad_especifica=None):
     """
-    Calcula y retorna el promedio de las temperaturas para cada ciudad y semana.
+    Calcula el promedio de las temperaturas de múltiples ciudades durante varias semanas.
 
-    :param datos_ciudades: Lista 3D con los datos de las temperaturas (Ciudades -> Semanas -> Días)
-    :param nombres_ciudades: Lista con los nombres de las ciudades
-    :return: Diccionario con los promedios de temperatura por ciudad y semana
+    Args:
+    temperaturas (list): Una lista 3D de temperaturas donde:
+                         1ra dimensión: Ciudades
+                         2da dimensión: Semanas
+                         3ra dimensión: Días de la semana con su temperatura.
+    ciudades (list): Lista de nombres de las ciudades correspondientes a las temperaturas.
+    ciudad_especifica (str, optional): Nombre de una ciudad específica para calcular el promedio de sus semanas.
+                                       Si no se especifica, se calculará para todas las ciudades.
+
+    Returns:
+    dict: Diccionario con los promedios de cada ciudad por semana.
     """
-    promedios_ciudades = {}  # Almacenar los resultados de promedios por ciudad
+    promedios = {}
 
-    # Iterar sobre cada ciudad
-    for indice_ciudad, ciudad_datos in enumerate(datos_ciudades):
-        promedios_ciudades[nombres_ciudades[indice_ciudad]] = []
+    for ciudad_idx, ciudad in enumerate(temperaturas):
+        nombre_ciudad = ciudades[ciudad_idx]
 
-        # Iterar sobre cada semana de esa ciudad
-        for indice_semana, semana_datos in enumerate(ciudad_datos):
-            # Sumar las temperaturas de todos los días de la semana
-            suma_temperaturas_semana = sum([dia["temp"] for dia in semana_datos])
+        if ciudad_especifica and nombre_ciudad != ciudad_especifica:
+            continue  # Si se especifica una ciudad, omitimos las otras
 
-            # Calcular el promedio dividiendo entre el número de días de la semana
-            promedio_temperatura = suma_temperaturas_semana / len(semana_datos)
+        promedios[nombre_ciudad] = []
 
-            # Guardar el promedio en el diccionario
-            promedios_ciudades[nombres_ciudades[indice_ciudad]].append(promedio_temperatura)
+        for semana_idx, semana in enumerate(ciudad):
+            suma_temperaturas = sum([dia["temp"] for dia in semana])
+            promedio = suma_temperaturas / len(semana)
+            promedios[nombre_ciudad].append({
+                "Semana": semana_idx + 1,
+                "Promedio": round(promedio, 2)
+            })
 
-    return promedios_ciudades
+    return promedios
 
 
-# Datos de ejemplo
-datos_temperaturas = [
+# Ejemplo de uso:
+temperaturas = [
+    # Pujili
     [
-        # Pujili
         [{"day": "Lunes", "temp": 16}, {"day": "Martes", "temp": 15}, {"day": "Miércoles", "temp": 10},
-         {"day": "Jueves", "temp": 16},
-         {"day": "Viernes", "temp": 9}, {"day": "Sábado", "temp": 15}, {"day": "Domingo", "temp": 16}],
+         {"day": "Jueves", "temp": 16}, {"day": "Viernes", "temp": 9}, {"day": "Sábado", "temp": 15},
+         {"day": "Domingo", "temp": 16}],
         [{"day": "Lunes", "temp": 15}, {"day": "Martes", "temp": 14}, {"day": "Miércoles", "temp": 18},
-         {"day": "Jueves", "temp": 20},
-         {"day": "Viernes", "temp": 10}, {"day": "Sábado", "temp": 15}, {"day": "Domingo", "temp": 9}],
+         {"day": "Jueves", "temp": 20}, {"day": "Viernes", "temp": 10}, {"day": "Sábado", "temp": 15},
+         {"day": "Domingo", "temp": 9}],
         [{"day": "Lunes", "temp": 17}, {"day": "Martes", "temp": 10}, {"day": "Miércoles", "temp": 12},
-         {"day": "Jueves", "temp": 18},
-         {"day": "Viernes", "temp": 24}, {"day": "Sábado", "temp": 15}, {"day": "Domingo", "temp": 13}],
+         {"day": "Jueves", "temp": 18}, {"day": "Viernes", "temp": 24}, {"day": "Sábado", "temp": 15},
+         {"day": "Domingo", "temp": 13}],
         [{"day": "Lunes", "temp": 7}, {"day": "Martes", "temp": 20}, {"day": "Miércoles", "temp": 14},
-         {"day": "Jueves", "temp": 13},
-         {"day": "Viernes", "temp": 12}, {"day": "Sábado", "temp": 17}, {"day": "Domingo", "temp": 9}]
+         {"day": "Jueves", "temp": 13}, {"day": "Viernes", "temp": 12}, {"day": "Sábado", "temp": 17},
+         {"day": "Domingo", "temp": 9}]
     ],
+    # Latacunga
     [
-        # Latacunga
         [{"day": "Lunes", "temp": 15}, {"day": "Martes", "temp": 17}, {"day": "Miércoles", "temp": 8},
-         {"day": "Jueves", "temp": 12},
-         {"day": "Viernes", "temp": 23}, {"day": "Sábado", "temp": 11}, {"day": "Domingo", "temp": 7}],
+         {"day": "Jueves", "temp": 12}, {"day": "Viernes", "temp": 23}, {"day": "Sábado", "temp": 11},
+         {"day": "Domingo", "temp": 7}],
         [{"day": "Lunes", "temp": 13}, {"day": "Martes", "temp": 16}, {"day": "Miércoles", "temp": 17},
-         {"day": "Jueves", "temp": 14},
-         {"day": "Viernes", "temp": 7}, {"day": "Sábado", "temp": 18}, {"day": "Domingo", "temp": 24}],
+         {"day": "Jueves", "temp": 14}, {"day": "Viernes", "temp": 7}, {"day": "Sábado", "temp": 18},
+         {"day": "Domingo", "temp": 24}],
         [{"day": "Lunes", "temp": 20}, {"day": "Martes", "temp": 11}, {"day": "Miércoles", "temp": 17},
-         {"day": "Jueves", "temp": 15},
-         {"day": "Viernes", "temp": 12}, {"day": "Sábado", "temp": 7}, {"day": "Domingo", "temp": 19}],
+         {"day": "Jueves", "temp": 15}, {"day": "Viernes", "temp": 12}, {"day": "Sábado", "temp": 7},
+         {"day": "Domingo", "temp": 19}],
         [{"day": "Lunes", "temp": 22}, {"day": "Martes", "temp": 17}, {"day": "Miércoles", "temp": 12},
-         {"day": "Jueves", "temp": 14},
-         {"day": "Viernes", "temp": 16}, {"day": "Sábado", "temp": 7}, {"day": "Domingo", "temp": 15}]
+         {"day": "Jueves", "temp": 14}, {"day": "Viernes", "temp": 16}, {"day": "Sábado", "temp": 7},
+         {"day": "Domingo", "temp": 15}]
     ],
+    # La Mana
     [
-        # La Mana
         [{"day": "Lunes", "temp": 32}, {"day": "Martes", "temp": 30}, {"day": "Miércoles", "temp": 32},
-         {"day": "Jueves", "temp": 24},
-         {"day": "Viernes", "temp": 30}, {"day": "Sábado", "temp": 22}, {"day": "Domingo", "temp": 24}],
+         {"day": "Jueves", "temp": 24}, {"day": "Viernes", "temp": 30}, {"day": "Sábado", "temp": 22},
+         {"day": "Domingo", "temp": 24}],
         [{"day": "Lunes", "temp": 30}, {"day": "Martes", "temp": 32}, {"day": "Miércoles", "temp": 24},
-         {"day": "Jueves", "temp": 22},
-         {"day": "Viernes", "temp": 30}, {"day": "Sábado", "temp": 32}, {"day": "Domingo", "temp": 20}],
+         {"day": "Jueves", "temp": 22}, {"day": "Viernes", "temp": 30}, {"day": "Sábado", "temp": 32},
+         {"day": "Domingo", "temp": 20}],
         [{"day": "Lunes", "temp": 22}, {"day": "Martes", "temp": 24}, {"day": "Miércoles", "temp": 30},
-         {"day": "Jueves", "temp": 24},
-         {"day": "Viernes", "temp": 32}, {"day": "Sábado", "temp": 22}, {"day": "Domingo", "temp": 32}],
+         {"day": "Jueves", "temp": 24}, {"day": "Viernes", "temp": 32}, {"day": "Sábado", "temp": 22},
+         {"day": "Domingo", "temp": 32}],
         [{"day": "Lunes", "temp": 22}, {"day": "Martes", "temp": 30}, {"day": "Miércoles", "temp": 24},
-         {"day": "Jueves", "temp": 22},
-         {"day": "Viernes", "temp": 34}, {"day": "Sábado", "temp": 20}, {"day": "Domingo", "temp": 22}]
+         {"day": "Jueves", "temp": 22}, {"day": "Viernes", "temp": 34}, {"day": "Sábado", "temp": 20},
+         {"day": "Domingo", "temp": 22}]
     ]
 ]
 
-nombres_ciudades = ["Pujili", "Latacunga", "La Mana"]
+ciudades = ["Pujili", "Latacunga", "La Mana"]
 
-# Llamar a la función y mostrar los resultados
-resultados_promedios = calcular_promedio_temperaturas(datos_temperaturas, nombres_ciudades)
-for ciudad, promedios in resultados_promedios.items():
-    for semana, promedio_semana in enumerate(promedios):
-        print(f"Promedio de temperaturas en {ciudad}, Semana {semana + 1}: {promedio_semana:.2f} grados")
+# Calcular el promedio para todas las ciudades
+promedios_todas = promedio_temperaturas(temperaturas, ciudades)
+print(promedios_todas)
+
+# Calcular el promedio solo para la ciudad de Pujili
+promedios_pujili = promedio_temperaturas(temperaturas, ciudades, ciudad_especifica="Pujili")
+print(promedios_pujili)
