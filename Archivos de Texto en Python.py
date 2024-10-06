@@ -1,5 +1,5 @@
 # Escritura de Archivo de Texto:
-# Abre (o crea si no existe) el archivo "my_notes.txt" en modo escritura ('w').
+# crear  el archivo "my_notes.txt" en modo escritura ('w').
 with open('my_notes.txt', 'w') as file:
     # Escribimos tres líneas de notas personales.
     file.write("Hoy aprendí sobre la manipulación de archivos en Python.\n")

@@ -1,0 +1,3 @@
+Hoy aprendí sobre la manipulación de archivos en Python.
+Es un tema útil para gestionar datos de manera eficiente.
+Practicaré más para consolidar el conocimiento.
